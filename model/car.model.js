@@ -11,7 +11,7 @@ var Car = function (car) {
 };
 
 Car.create = function (newCar, result) {
-	connection.query('INSERT INTO Car SET ?', newCar, function (err, res) {
+	connection.query('INSERT INTO car SET ?', newCar, function (err, res) {
 		if (err) {
 			console.log('error: ', err);
 			result(err, null);
@@ -22,7 +22,7 @@ Car.create = function (newCar, result) {
 };
 
 Car.findById = function (id, result) {
-	connection.query('SELECT * FROM Car WHERE ID = ?', id, function (err, res) {
+	connection.query('SELECT * FROM car WHERE ID = ?', id, function (err, res) {
 		if (err) {
 			console.log('error: ', err);
 			result(err, null);
@@ -33,7 +33,7 @@ Car.findById = function (id, result) {
 };
 
 Car.findAll = function (result) {
-	connection.query('SELECT * FROM Car', function (err, res) {
+	connection.query('SELECT * FROM car', function (err, res) {
 		if (err) {
 			console.log('error: ', err);
 			result(null, err);
@@ -45,7 +45,7 @@ Car.findAll = function (result) {
 
 Car.update = function (id, car, result) {
 	connection.query(
-		'UPDATE Car SET IdMark = ?, CarType = ?, CarModel = ?, CarColor = ?, YearOfManufacture = ?, DailyRentalPrice = ? WHERE ID = ?',
+		'UPDATE car SET IdMark = ?, CarType = ?, CarModel = ?, CarColor = ?, YearOfManufacture = ?, DailyRentalPrice = ? WHERE ID = ?',
 		[
 			car.IdMark,
 			car.CarType,
@@ -67,7 +67,7 @@ Car.update = function (id, car, result) {
 };
 
 Car.delete = function (id, result) {
-	connection.query('DELETE FROM Car WHERE ID = ?', id, function (err, res) {
+	connection.query('DELETE FROM car WHERE ID = ?', id, function (err, res) {
 		if (err) {
 			console.log('error: ', err);
 			result(null, err);
