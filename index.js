@@ -14,6 +14,14 @@ app.get('/', (req, res) => {
 
 const AddressDeliveryRouter = require('./router/addressdelivery.router');
 app.use('/api/addressdelivery', AddressDeliveryRouter);
+const CarDirectoryRouter = require('./router/cardirectory.router');
+app.use('/api/cardirectory', CarDirectoryRouter);
+const CarRouter = require('./router/car.router');
+app.use('/api/car', CarRouter);
+const ClientRouter = require('./router/client.router');
+app.use('/api/client', ClientRouter);
+const ReservationRouter = require('./router/reservation.router');
+app.use('/api/reservation', ReservationRouter);
 
 app.listen(PORT, () => {
 	console.log(`Server running on http://localhost:${PORT}`);
