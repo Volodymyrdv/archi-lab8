@@ -9,7 +9,7 @@ var AddressDelivery = function (addressdelivery) {
 };
 
 AddressDelivery.create = function (newAddressDelivery, result) {
-	connection.query('INSERT INTO AddressDelivery set ?', newAddressDelivery, function (err, res) {
+	connection.query('INSERT INTO addressdelivery SET ?', newAddressDelivery, function (err, res) {
 		if (err) {
 			console.log('error: ', err);
 			result(err, null);
@@ -21,7 +21,7 @@ AddressDelivery.create = function (newAddressDelivery, result) {
 };
 
 AddressDelivery.findById = function (id, result) {
-	connection.query('SELECT * FROM AddressDelivery WHERE ID = ?', id, function (err, res) {
+	connection.query('SELECT * FROM addressdelivery WHERE ID = ?', id, function (err, res) {
 		if (err) {
 			console.log('error: ', err);
 			result(err, null);
@@ -32,7 +32,7 @@ AddressDelivery.findById = function (id, result) {
 };
 
 AddressDelivery.findAll = function (result) {
-	connection.query('SELECT * FROM AddressDelivery', function (err, res) {
+	connection.query('SELECT * FROM addressdelivery', function (err, res) {
 		if (err) {
 			console.log('error: ', err);
 			result(null, err);
@@ -45,7 +45,7 @@ AddressDelivery.findAll = function (result) {
 
 AddressDelivery.update = function (id, addressdelivery, result) {
 	connection.query(
-		'UPDATE AddressDelivery SET City = ?, District = ?, Street = ?, BuildingNumber = ? WHERE ID = ?',
+		'UPDATE addressdelivery SET City = ?, District = ?, Street = ?, BuildingNumber = ? WHERE ID = ?',
 		[
 			addressdelivery.City,
 			addressdelivery.District,
@@ -64,7 +64,7 @@ AddressDelivery.update = function (id, addressdelivery, result) {
 	);
 };
 AddressDelivery.delete = function (id, result) {
-	connection.query('DELETE FROM AddressDelivery WHERE ID = ?', [id], function (err, res) {
+	connection.query('DELETE FROM addressdelivery WHERE ID = ?', [id], function (err, res) {
 		if (err) {
 			console.log('error: ', err);
 			result(null, err);
