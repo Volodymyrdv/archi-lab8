@@ -54,13 +54,29 @@ CarDirectory.update = function (id, cardirectory, result) {
 };
 
 CarDirectory.delete = function (id, result) {
-	connection.query('DELETE FROM cardirectory WHERE ID = ?', id, function (err, res) {
+	connection.query('DELETE FROM reservation WHERE IdCar = ?', id, function (err, res) {
 		if (err) {
 			console.log('error: ', err);
 			result(null, err);
-		} else {
-			result(null, res);
+			return;
 		}
+
+		connection.query('DELETE FROM car WHERE ID = ?', id, function (err, res) {
+			if (err) {
+				console.log('error: ', err);
+				result(null, err);
+				return;
+			}
+
+			connection.query('DELETE FROM cardirectory WHERE ID = ?', id, function (err, res) {
+				if (err) {
+					console.log('error: ', err);
+					result(null, err);
+				} else {
+					result(null, res);
+				}
+			});
+		});
 	});
 };
 

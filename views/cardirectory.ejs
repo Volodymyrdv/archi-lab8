@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" href="./../public/style/main.css" />
+		<title>Марки Автомобілів</title>
+	</head>
+	<body>
+		<div class="container mt-5">
+			<h1 class="text-center mb-4">Марки Автомобілів</h1>
+			<a class="btn btn-outline-secondary mb-3" href="/">Повернутися на головну</a>
+			<table class="table table-bordered table-striped">
+				<thead class="table-dark">
+					<tr>
+						<th>ID</th>
+						<th>Марка</th>
+						<th>Дії</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% if (cardirectories && cardirectories.length > 0) { %>
+					<%cardirectories.forEach(function(mark) { %>
+					<tr>
+						<td><%= mark.ID %></td>
+						<td><%= mark.MarkName %></td>
+						<td>
+							<a href="/api/cardirectory/<%= mark.ID %>" class="btn btn-sm btn-info">Змінити</a>
+							<a href="/api/cardirectory/delete/<%= mark.ID %>" class="btn btn-sm btn-danger"
+								>Видалити</a
+							>
+						</td>
+					</tr>
+					<% }); %> <% } else { %>
+					<tr>
+						<td colspan="7" class="text-center">Немає даних</td>
+					</tr>
+					<% } %>
+				</tbody>
+			</table>
+			<h2 class="text-center">Додати марку</h2>
+			<form action="/api/cardirectory" method="post" class="text-center">
+				<div class="mb-3">
+					<label>
+						Марка автомобіля
+						<input
+							type="text"
+							class="form-control"
+							placeholder="Марка"
+							id="MarkName"
+							name="MarkName"
+							required
+						/>
+					</label>
+				</div>
+				<button type="submit" class="btn btn-primary">Додати</button>
+			</form>
+		</div>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+			crossorigin="anonymous"
+		></script>
+	</body>
+</html>

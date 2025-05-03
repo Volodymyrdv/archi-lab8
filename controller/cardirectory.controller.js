@@ -5,7 +5,7 @@ exports.findAll = function (req, res) {
 		if (err) {
 			res.send(err);
 		} else {
-			res.send(cardirectories);
+			res.render('cardirectory.ejs', { cardirectories: cardirectories });
 		}
 	});
 };
@@ -15,7 +15,8 @@ exports.findById = function (req, res) {
 		if (err) {
 			res.send(err);
 		} else {
-			res.send(cardirectory);
+			// res.send(cardirectory);
+			res.render('cardirectory_edit.ejs', { cardirectory: cardirectory[0] });
 		}
 	});
 };
@@ -29,7 +30,7 @@ exports.create = function (req, res) {
 			if (err) {
 				res.send(err);
 			} else {
-				res.json({ error: false, message: 'CarDirectory created', data: cardirectory });
+				res.redirect('/api/cardirectory');
 			}
 		});
 	}
@@ -44,7 +45,7 @@ exports.update = function (req, res) {
 			if (err) {
 				res.send(err);
 			} else {
-				res.json({ error: false, message: 'CarDirectory updated', data: cardirectory });
+				res.redirect('/api/cardirectory');
 			}
 		});
 	}
@@ -55,7 +56,7 @@ exports.delete = function (req, res) {
 		if (err) {
 			res.send(err);
 		} else {
-			res.json({ error: false, message: 'CarDirectory deleted' });
+			res.redirect('/api/cardirectory');
 		}
 	});
 };

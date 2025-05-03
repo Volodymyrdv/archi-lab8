@@ -1,11 +1,18 @@
 const Reservation = require('../model/reservation.model');
+const Car = require('../model/car.model');
 
 exports.findAll = function (req, res) {
 	Reservation.findAll(function (err, reservations) {
 		if (err) {
 			res.send(err);
 		} else {
-			res.send(reservations);
+			Car.findAll(function (err, cars) {
+				if (err) {
+					res.send(err);
+				} else {
+					res.render('reservations.ejs', { reservations: reservations, cars: cars });
+				}
+			});
 		}
 	});
 };
@@ -15,7 +22,7 @@ exports.findById = function (req, res) {
 		if (err) {
 			res.send(err);
 		} else {
-			res.send(reservation);
+			res.render('reservations_edit.ejs', { reservation: reservation[0] });
 		}
 	});
 };
@@ -29,7 +36,7 @@ exports.create = function (req, res) {
 			if (err) {
 				res.send(err);
 			} else {
-				res.json({ error: false, message: 'Reservation created', data: reservation });
+				res.redirect('/api/reservation');
 			}
 		});
 	}
@@ -44,7 +51,7 @@ exports.update = function (req, res) {
 			if (err) {
 				res.send(err);
 			} else {
-				res.json({ error: false, message: 'Reservation updated', data: reservation });
+				res.redirect('/api/reservation');
 			}
 		});
 	}
@@ -55,7 +62,7 @@ exports.delete = function (req, res) {
 		if (err) {
 			res.send(err);
 		} else {
-			res.json({ error: false, message: 'Reservation deleted' });
+			res.redirect('/api/reservation');
 		}
 	});
 };

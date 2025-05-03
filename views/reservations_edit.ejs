@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" href="./../public/style/main.css" />
+		<title>Зміна Бронювання</title>
+	</head>
+	<body>
+		<div class="container mt-5">
+			<h1 class="text-center mb-4">Зміна</h1>
+			<a class="btn btn-outline-secondary mb-3" href="/api/reservation">Повернутися до бронювань</a>
+
+			<form action="/api/reservation/put/<%= reservation.ID %>" method="post">
+				<input type="hidden" id="IdCar" name="IdCar" value="<%= reservation.IdCar %>" />
+				<div class="mb-3">
+					<label>
+						Початок бронювання
+						<input
+							type="date"
+							class="form-control"
+							id="RentalStartDate"
+							name="RentalStartDate"
+							value="<%= reservation.RentalStartDate %>"
+							required
+						/>
+					</label>
+				</div>
+				<div class="mb-3">
+					<label>
+						Кінець бронювання
+						<input
+							type="date"
+							class="form-control"
+							id="RentalEndDate"
+							name="RentalEndDate"
+							value="<%= reservation.RentalEndDate %>"
+							required
+						/>
+					</label>
+				</div>
+				<button type="submit" class="btn btn-primary">Змінити</button>
+			</form>
+		</div>
+
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+			crossorigin="anonymous"
+		></script>
+	</body>
+</html>

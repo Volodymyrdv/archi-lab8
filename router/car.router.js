@@ -9,8 +9,10 @@ router.get('/:id', СarController.findById);
 // Додавання нової адреси доставки
 router.post('/', СarController.create);
 // Оновлення адреси доставки
-router.put('/:id', СarController.update);
+// router.put('/:id', СarController.update);
+router.post('/put/:id', СarController.update);
 // Видалення адреси доставки
-router.delete('/:id', СarController.delete);
+// router.delete('/:id', СarController.delete);
+router.get('/delete/:id', СarController.delete);
 
 module.exports = router;

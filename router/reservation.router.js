@@ -9,8 +9,10 @@ router.get('/:id', ReservationController.findById);
 // Додавання нової адреси доставки
 router.post('/', ReservationController.create);
 // Оновлення адреси доставки
-router.put('/:id', ReservationController.update);
+// router.put('/:id', ReservationController.update);
+router.post('/put/:id', ReservationController.update);
 // Видалення адреси доставки
-router.delete('/:id', ReservationController.delete);
+// router.delete('/:id', ReservationController.delete);
+router.get('/delete/:id', ReservationController.delete);
 
 module.exports = router;

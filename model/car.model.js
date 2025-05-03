@@ -33,14 +33,19 @@ Car.findById = function (id, result) {
 };
 
 Car.findAll = function (result) {
-	connection.query('SELECT * FROM car', function (err, res) {
-		if (err) {
-			console.log('error: ', err);
-			result(null, err);
-		} else {
-			result(null, res);
+	connection.query(
+		`SELECT *
+			FROM car
+			INNER JOIN cardirectory ON car.IdMark = cardirectory.ID`,
+		function (err, res) {
+			if (err) {
+				console.log('error: ', err);
+				result(err, null);
+			} else {
+				result(null, res);
+			}
 		}
-	});
+	);
 };
 
 Car.update = function (id, car, result) {
@@ -67,13 +72,21 @@ Car.update = function (id, car, result) {
 };
 
 Car.delete = function (id, result) {
-	connection.query('DELETE FROM car WHERE ID = ?', id, function (err, res) {
+	connection.query('DELETE FROM reservation WHERE IdCar = ?', id, function (err, res) {
 		if (err) {
 			console.log('error: ', err);
 			result(null, err);
-		} else {
-			result(null, res);
+			return;
 		}
+
+		connection.query('DELETE FROM car WHERE ID = ?', id, function (err, res) {
+			if (err) {
+				console.log('error: ', err);
+				result(null, err);
+			} else {
+				result(null, res);
+			}
+		});
 	});
 };
 

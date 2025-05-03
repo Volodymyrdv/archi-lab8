@@ -1,11 +1,18 @@
 const Car = require('../model/car.model');
+const CarDirectory = require('../model/cardirectory.model');
 
 exports.findAll = function (req, res) {
 	Car.findAll(function (err, cars) {
 		if (err) {
 			res.send(err);
 		} else {
-			res.send(cars);
+			CarDirectory.findAll(function (err, cardirectories) {
+				if (err) {
+					res.send(err);
+				} else {
+					res.render('car.ejs', { cars: cars, cardirectories: cardirectories });
+				}
+			});
 		}
 	});
 };
@@ -15,7 +22,7 @@ exports.findById = function (req, res) {
 		if (err) {
 			res.send(err);
 		} else {
-			res.send(car);
+			res.render('car_edit.ejs', { car: car[0] });
 		}
 	});
 };
@@ -29,7 +36,7 @@ exports.create = function (req, res) {
 			if (err) {
 				res.send(err);
 			} else {
-				res.json({ error: false, message: 'Car created', data: car });
+				res.redirect('/api/car');
 			}
 		});
 	}
@@ -44,7 +51,7 @@ exports.update = function (req, res) {
 			if (err) {
 				res.send(err);
 			} else {
-				res.json({ error: false, message: 'Car updated', data: car });
+				res.redirect('/api/car');
 			}
 		});
 	}
@@ -55,7 +62,7 @@ exports.delete = function (req, res) {
 		if (err) {
 			res.send(err);
 		} else {
-			res.json({ error: false, message: 'Car deleted' });
+			res.redirect('/api/car');
 		}
 	});
 };
